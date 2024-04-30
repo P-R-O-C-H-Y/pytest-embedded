@@ -73,6 +73,9 @@ class WokwiCLI(DuplicateStdoutPopen):
     def create_wokwi_toml(self):
         app = self.app
         flasher_args = self.firmware_resolver.resolve_firmware(app)
+        logging.info('App path: %s', app.app_path)
+        logging.info('Resolved firmware: %s', flasher_args)
+        logging.info('Resolved elf: %s', app.elf_file)
         wokwi_toml_path = os.path.join(app.app_path, 'wokwi.toml')
         firmware_path = Path(os.path.relpath(flasher_args, app.app_path)).as_posix()
         elf_path = Path(os.path.relpath(app.elf_file, app.app_path)).as_posix()
